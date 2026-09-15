@@ -10,7 +10,7 @@ class Curso {
 
     static constraints = {
         titulo nullable: false, blank: false
-        descricao nullable: false, blalnk: false
-        cargaHoraria nullable: false, min: 1
+        descricao nullable: false, blank: false
+        cargaHoraria nullable: false, blank: false, min: 1
     }
 }
