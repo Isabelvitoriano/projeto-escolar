@@ -56,7 +56,7 @@ class AlunoController {
             return
         }
 
-        alunoService.salvar(aluno)
+        alunoService.atualizar(aluno)
         respond aluno
     }
 
