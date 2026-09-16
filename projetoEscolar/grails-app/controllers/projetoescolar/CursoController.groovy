@@ -49,9 +49,7 @@ class CursoController {
             return
         }
 
-        curso.titulo = request.JSON.titulo
-        curso.descricao = request.JSON.descricao
-        curso.cargaHoraria = request.JSON.cargaHoraria
+        bindData(curso, request.JSON)
 
         if (!curso.validate()) {
             respond curso.errors, status: 400

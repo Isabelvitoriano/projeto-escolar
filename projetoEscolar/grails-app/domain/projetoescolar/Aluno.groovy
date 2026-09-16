@@ -2,7 +2,6 @@ package projetoescolar
 
 class Aluno {
 
-    Long id
     String nome
     String email
     Date dataNascimento

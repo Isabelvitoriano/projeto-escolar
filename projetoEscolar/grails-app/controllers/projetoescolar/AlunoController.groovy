@@ -49,16 +49,14 @@ class AlunoController {
             return
         }
 
-        aluno.nome = request.JSON.nome
-        aluno.email = request.JSON.email
-        aluno.dataNascimento = request.JSON.dataNascimento
+        bindData(aluno, request.JSON)
 
         if (!aluno.validate()) {
             respond aluno.errors, status: 400
             return
         }
 
-        alunoService.atualizar(aluno)
+        alunoService.salvar(aluno)
         respond aluno
     }
 

@@ -25,7 +25,7 @@ class MatriculaController {
 
     def save() {
 
-        def matricula = new matricula(
+        def matricula = new Matricula(
                 titulo: request.JSON.titulo,
                 descricao: request.JSON.descricao,
                 cargaHoraria: request.JSON.cargaHoraria
@@ -49,9 +49,7 @@ class MatriculaController {
             return
         }
 
-        matricula.titulo = request.JSON.titulo
-        matricula.descricao = request.JSON.descricao
-        matricula.cargaHoraria = request.JSON.cargaHoraria
+        bindData(matricula, request.JSON)
 
         if (!matricula.validate()) {
             respond matricula.errors, status: 400
