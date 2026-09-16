@@ -24,11 +24,24 @@ class MatriculaController {
     }
 
     def save() {
+        def aluno = Aluno.get(request.JSON.alunoId as Long)
+        def curso = Curso.get(request.JSON.cursoId as Long)
+
+        if (aluno == null) {
+            render status: 404, text: "Aluno não encontrado"
+            return
+        }
+
+        if (curso == null) {
+            render status: 404, text: "Curso não encontrado"
+            return
+        }
 
         def matricula = new Matricula(
-                titulo: request.JSON.titulo,
-                descricao: request.JSON.descricao,
-                cargaHoraria: request.JSON.cargaHoraria
+                dataMatricula: request.JSON.dataMatricula,
+                valorPago: request.JSON.valorPago,
+                aluno: aluno,
+                curso: curso
         )
 
         if (!matricula.validate()) {
