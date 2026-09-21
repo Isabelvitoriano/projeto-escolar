@@ -1,0 +1,21 @@
+:root {
+    --primaria: #182739;
+    --cabecalho: #032448;
+    --cor-fundo: #f4f7fb;
+    --branco: #fff;
+    --texto: #cbdcec;
+    --link: #386fa4;
+    --link-opacity: rgba(24, 39, 57, 0.5);
+    --danger: #e70000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'poppins', sans-serif;
+}
+
+body {
+    background-color: var(--cor-fundo);
+}

@@ -1,0 +1,34 @@
+header {
+    display: flex;
+    background-color: var(--cabecalho);
+    color: var(--branco);
+    gap: 20px;
+    align-items: center;
+}
+
+.icone {
+    color: var(--branco);
+    background-color: var(--link);
+    display: flex;
+    padding: 10px;
+    border-radius: 20px;
+    margin-left: 10px;
+
+    & img {
+        width: 30px;
+    }
+}
+
+.titulo {
+    display: flex;
+    flex-direction: column;
+}
+
+img {
+    width: 20px;
+}
+
+button {
+    display: flex;
+    align-items: center;
+}
