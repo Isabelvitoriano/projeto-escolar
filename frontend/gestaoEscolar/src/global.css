@@ -3,8 +3,11 @@
     --cabecalho: #032448;
     --cor-fundo: #f4f7fb;
     --branco: #fff;
-    --texto: #cbdcec;
+    --branco-opacity: rgba(255, 255, 255, 0.6);
+    --texto: rgba(24, 39, 57, 0.6);
+    --texto-select: rgba(24, 39, 57, 0.8);
     --link: #386fa4;
+    --link-text: #0c84f3;
     --link-opacity: rgba(24, 39, 57, 0.5);
     --danger: #e70000;
 }
@@ -18,4 +21,8 @@
 
 body {
     background-color: var(--cor-fundo);
+}
+
+img {
+    width: 20px;
 }
