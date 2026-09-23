@@ -1,13 +1,44 @@
 import './Header.css'
+import {Button, Menu} from 'antd'
 import Icon from '../../assets/icon.svg?react'
 import Resetar from '../../assets/resetar.svg?react'
 import Aluno from '../../assets/aluno.svg?react'
 import Curso from '../../assets/curso.svg?react'
 import Matricula from '../../assets/matricula.svg?react'
 
-function Header() {
-    
-    
+function Header({paginaAtual, aoMudarPagina, contadores, aoReinciar}) {
+    const itens = [
+        {
+            key: 'alunos',
+            label: (
+                <span className='item-menu'>
+                    <Aluno className='icon-aluno'/>
+                    Alunos
+                    <span className='contador'>{contadores.alunos}</span>
+                </span>
+            ),
+        },
+        {
+            key: 'cursos',
+            label: (
+                <span className='item-menu'>
+                    <Curso className='icon-curso'/>
+                    Cursos
+                    <span className='contador'>{contadores.cursos}</span>
+                </span>
+            ),
+        },
+        {
+            key: 'matriculas',
+            label: (
+                <span className='item-menu'>
+                    <Matricula className='icon-matricula'/>
+                    Matrículas
+                    <span className='contador'>{contadores.matriculas}</span>
+                </span>
+            ),
+        },
+    ]
 
   return (
     <>
@@ -20,35 +51,26 @@ function Header() {
                 <h1>DevSchool</h1>
             </div>
 
-            <button className='reiniciar'>
-                Reiniciar Sistema
-                <Resetar className='icon-reset'/>
-
-            </button>
+            <Button
+                className='reiniciar'
+                ghost
+                icon={<Resetar className='icon-reset' />}
+                onClick={aoReinciar}
+            >
+                Reiniciar
+            </Button>
         </header>
 
         <nav className='navbar'>
-            <button >
-                <Aluno className='icon-aluno'/>
-                <span>Alunos</span>
-                <span className='contador'>4</span>
-            </button>
-            
-            <button>
-                <Curso className='icon-curso'/>
-                <span>Cursos</span>
-                <span className='contador'>3</span>
-            </button>
-            
-            <button>
-                <Matricula className='icon-matricula'/>
-                <span>Matrículas</span>
-                <span className='contador'>4</span>
-            </button>
+            <Menu
+                mode='horizontal'
+                items={itens}
+                selectedKeys={[paginaAtual]}
+                onClick={(evento) => aoMudarPagina(evento.key)}
+            />
         </nav>
     </>
   )
 }
-
 
 export default Header;
