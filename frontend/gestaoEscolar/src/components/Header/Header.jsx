@@ -61,14 +61,14 @@ function Header({contadores, aoReinciar}) {
                 <h1>DevSchool</h1>
             </div>
 
-            <Button
+            {/* <Button
                 className='reiniciar'
                 ghost
                 icon={<Resetar className='icon-reset' />}
                 onClick={aoReinciar}
             >
                 Reiniciar
-            </Button>
+            </Button> */}
         </header>
 
         <nav className='navbar'>
