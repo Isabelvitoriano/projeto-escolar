@@ -8,7 +8,6 @@ class BootStrap {
         Aluno.withTransaction {
             if (Aluno.count() > 0) return
 
-            // Criação do formatador explicito para evitar ambiguidade com o nome da variável
             def parseData = { String s -> new SimpleDateFormat('yyyy-MM-dd').parse(s) }
 
             def ana    = new Aluno(nome: 'Ana Souza',    email: 'ana@email.com',    dataNascimento: parseData('2000-01-10')).save(failOnError: true)
