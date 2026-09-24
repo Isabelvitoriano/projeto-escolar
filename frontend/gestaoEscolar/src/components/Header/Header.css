@@ -1,4 +1,4 @@
-header {
+.cabecalho {
     display: flex;
     background-color: var(--cabecalho);
     color: var(--branco);
@@ -30,85 +30,61 @@ header {
 }
 
 .reiniciar {
-    display: flex;
     margin-left: auto;
     margin-right: 20px;
-    padding: 5px 10px;
-    gap: 10px;
-    border: solid 1;
-    border-color: var(--branco-opacity);
     color: var(--branco-opacity);
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    cursor: pointer;
+    border-color: var(--branco-opacity);
     
     .icon-reset {
-        width: 20px;
+        width: 18px;
         height: auto;
-        fill: var(--branco-opacity);
-    }
-
-}
-
-.reiniciar:hover {
-    color: var(--branco);
-    background-color: var(--link);
-
-    .icon-reset{
-        fill: var(--branco);
     }
 }
 
-/*  */
-/* navegação */
-/*  */
+.ant-btn-default:hover {
+    background-color: rgba(56, 111, 164, 0.8) !important;
+    color: var(--branco) !important;
+    border-color: var(--branco) !important;
+}
 
+/*  */
+/* navbar */
+/*  */
 
 .navbar {
     background-color: var(--branco);
-    display: flex;
-    gap: 10px;
+}
+.navbar .ant-menu {
     justify-content: center;
+}
 
-    & button {
-        border: hidden;
-        border-bottom: solid 2px transparent;
-        padding: 10px 20px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        color: var(--texto);
-        background-color: var(--branco);
-        cursor: pointer;
-    }
+.item-menu {
+    display: flex;
+    padding: 2px;
+    gap: 10px;
+    color: var(--link-opacity);
+    font-weight: 400;
+    align-items: center;
+}
 
-    & .contador {
-        background-color: rgba(24, 39, 57, 0.1);
-        padding: 1px 6px;
-        border-radius: 50px;
-    }
+.ant-menu-horizontal .ant-menu-item:not(.ant-menu-item-selected):hover::after {
+    border-bottom-color: rgba(24, 39, 57, 0.15) !important;
+}
 
-    .icon-aluno, .icon-matricula {
-        width: 20px;
-        height: auto;
-    }
-    
-    .icon-curso {
-        width: 30px;
-        height: auto;
-    }
+.ant-menu-item-selected .ant-menu-item:hover::after .item-menu {
+    border-bottom-color: var(--link-text) !important;
+}
 
-    button:hover {
-        color: var(--texto-select);
-        border-bottom-color: rgba(24, 39, 57, 0.2);
-    }
-    
-    button:visited {
-        color: var(--link-text);
-        border-bottom-color: var(--link-text);
-    
-        .contador {
-            background-color: rgb(198, 228, 255);
-        }
-    }
+.ant-menu-item-selected .item-menu{
+    color: var(--link-text);
+}
+
+.icon-aluno, .icon-matricula {
+    width: 20px;
+    height: auto;
+}
+
+.icon-curso {
+    width: 30px;
+    height: auto;
 }
