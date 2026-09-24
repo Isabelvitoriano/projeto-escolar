@@ -41,7 +41,7 @@
     }
 }
 
-.ant-btn-default:hover {
+.cabecalho .ant-btn-default:hover {
     background-color: rgba(56, 111, 164, 0.8) !important;
     color: var(--branco) !important;
     border-color: var(--branco) !important;
@@ -54,6 +54,7 @@
 .navbar {
     background-color: var(--branco);
 }
+
 .navbar .ant-menu {
     justify-content: center;
 }

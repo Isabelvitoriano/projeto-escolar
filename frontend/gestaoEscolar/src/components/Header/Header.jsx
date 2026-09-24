@@ -1,4 +1,5 @@
-import './Header.css'
+    import './Header.css'
+import {Link, useLocation} from 'react-router-dom'
 import {Button, Menu} from 'antd'
 import Icon from '../../assets/icon.svg?react'
 import Resetar from '../../assets/resetar.svg?react'
@@ -6,36 +7,45 @@ import Aluno from '../../assets/aluno.svg?react'
 import Curso from '../../assets/curso.svg?react'
 import Matricula from '../../assets/matricula.svg?react'
 
-function Header({paginaAtual, aoMudarPagina, contadores, aoReinciar}) {
+function Header({contadores, aoReinciar}) {
+    const {pathname} = useLocation()
+    const secaoAtual = pathname.split('/')[1]
+
     const itens = [
         {
             key: 'alunos',
             label: (
-                <span className='item-menu'>
-                    <Aluno className='icon-aluno'/>
-                    Alunos
-                    <span className='contador'>{contadores.alunos}</span>
-                </span>
+                <Link to={'/alunos'}>
+                    <span className='item-menu'>
+                        <Aluno className='icon-aluno'/>
+                        Alunos
+                        <span className='contador'>{contadores.alunos}</span>
+                    </span>
+                </Link>
             ),
         },
         {
             key: 'cursos',
             label: (
-                <span className='item-menu'>
-                    <Curso className='icon-curso'/>
-                    Cursos
-                    <span className='contador'>{contadores.cursos}</span>
-                </span>
+                <Link to={'/cursos'}>
+                    <span className='item-menu'>
+                        <Curso className='icon-curso'/>
+                        Cursos
+                        <span className='contador'>{contadores.cursos}</span>
+                    </span>
+                </Link>
             ),
         },
         {
             key: 'matriculas',
             label: (
-                <span className='item-menu'>
-                    <Matricula className='icon-matricula'/>
-                    Matrículas
-                    <span className='contador'>{contadores.matriculas}</span>
-                </span>
+                <Link to={'/matriculas'}>
+                    <span className='item-menu'>
+                        <Matricula className='icon-matricula'/>
+                        Matrículas
+                        <span className='contador'>{contadores.matriculas}</span>
+                    </span>
+                </Link>
             ),
         },
     ]
@@ -65,8 +75,7 @@ function Header({paginaAtual, aoMudarPagina, contadores, aoReinciar}) {
             <Menu
                 mode='horizontal'
                 items={itens}
-                selectedKeys={[paginaAtual]}
-                onClick={(evento) => aoMudarPagina(evento.key)}
+                selectedKeys={[secaoAtual]}
             />
         </nav>
     </>

@@ -1,31 +1,38 @@
-import { useState } from 'react'
-import { ConfigProvider } from 'antd'
-import './global.css'
-import Header from './components/Header/Header.jsx'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import { App as AntApp, ConfigProvider } from 'antd'
+import AppLayout from './components/AppLayout/AppLayout.jsx'
+import NaoEncontrado from './components/NaoEncontrado/NaoEncontrado.jsx'
 import Alunos from './pages/Alunos/Alunos.jsx'
+import AlunoForm from './pages/Alunos/AlunoForm.jsx'
+import Cursos from './pages/Cursos/Cursos.jsx'
+import CursoForm from './pages/Cursos/CursoForm.jsx'
+import Matriculas from './pages/Matriculas/Matriculas.jsx'
+import MatriculaForm from './pages/Matriculas/MatriculaForm.jsx'
 
 function App() {
-    const [paginaAtual, setPaginaAtual] = useState('alunos')
-    const contadores = {alunos: 4, cursos: 3, matriculas: 4}
-
-    return (
-        <ConfigProvider
-            theme={{token: {colorPrimary: '#0c84f3', fontFamily: "'Poopins', sans-serif"}}}
-        >
-            <Header
-                paginaAtual={paginaAtual}
-                aoMudarPagina={setPaginaAtual}
-                contadores={contadores}
-                aoReinciar={() => console.log('reiniciar: ainda sem função')}
-            />
-
-            <main className='conteudo'>
-                {paginaAtual === 'alunos' && <Alunos/>}
-                {paginaAtual === 'cursos' && <h2>Página de Curso</h2>}
-                {paginaAtual === 'matriculas' && <h2>Página de Matrículas</h2>}
-            </main>
-        </ConfigProvider>
-    )
+  return (
+    <ConfigProvider
+      theme={{ token: { colorPrimary: '#0c84f3', fontFamily: "'Poppins', sans-serif" } }}
+    >
+      <AntApp>
+        <Routes>
+          <Route element={<AppLayout />}>
+            <Route index element={<Navigate to='/alunos' replace />} />
+            <Route path='alunos' element={<Alunos />} />
+            <Route path='alunos/novo' element={<AlunoForm />} />
+            <Route path='alunos/:id/editar' element={<AlunoForm />} />
+            <Route path='cursos' element={<Cursos />} />
+            <Route path='cursos/novo' element={<CursoForm />} />
+            <Route path='cursos/:id/editar' element={<CursoForm />} />
+            <Route path='matriculas' element={<Matriculas />} />
+            <Route path='matriculas/novo' element={<MatriculaForm />} />
+            <Route path='matriculas/:id/editar' element={<MatriculaForm />} />
+            <Route path='*' element={<NaoEncontrado />} />
+          </Route>
+        </Routes>
+      </AntApp>
+    </ConfigProvider>
+  )
 }
 
-export default App;
+export default App
