@@ -1,104 +1,84 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
-<html>
-<head>
-    <title>Cursos</title>
-</head>
+<meta name="layout" content="main">
 
-<body>
+<title>Cursos</title>
+<h2 class="titulo-page">Cursos</h2>
 
 <div class="barra-acoes">
-
-    <h2>Cursos</h2>
-
-    <a
-        class="botao botao-primario"
-        href="${createLink(controller: 'curso', action: 'create')}">
-        + Novo curso
-    </a>
-
-</div>
-
-<form
-    method="GET"
-    action="${createLink(controller: 'curso', action: 'index')}">
+    <div class="busca">
+        <asset:image src="pesquisar.svg" alt=""/>
+    </div>
 
     <input
+        type="search"
+        id="busca-cursos"
         class="campo-busca"
-        type="text"
-        name="busca"
-        value="${params.busca ?: ''}"
-        placeholder="Pesquisar por título ou ID...">
+        placeholder="Pesquisar por título ou ID..."/>
+</div>
 
-    <button
-        class="botao botao-secundario"
-        type="submit">
-        Pesquisar
-    </button>
+<g:link controller="curso" action="create" class="btn criar">
+    <asset:image src="add.svg" alt="" class="add"/>
+    Novo Curso
+</g:link>
 
-</form>
+<div class="table">
+    <table
+        class="tabela"
+        data-tabela
+        data-busca="#busca-cursos"
+        data-paginacao="#paginacao-cursos">
 
-<br>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Descrição</th>
+                <th>Carga Horária</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
 
-<table class="tabela">
+        <tbody>
+            <g:each var="curso" in="${ cursos }">
+               <tr data-search="${curso.id} ${curso.titulo} ${curso.descricao}">
+                <td>${curso.id}</td>
+                <td>${curso.titulo}</td>
+                <td>${curso.descricao}</td>
+                <td>${curso.cargaHoraria}h</td>
 
-    <thead>
+                <td>
+                    <div class="acoes">
+                        <g:link
+                            controller="curso"
+                            action="edit"
+                            id="${curso.id}"
+                            class="btn editar">
+                        <asset:image src="editar.svg" alt="" class="edit"/> 
+                        </g:link>
 
-    <tr>
-        <th>ID</th>
-        <th>Título</th>
-        <th>Descrição</th>
-        <th>Carga horária</th>
-        <th>Ações</th>
-    </tr>
-
-    </thead>
-
-    <tbody>
-
-    <g:each in="${cursos}" var="curso">
-
-        <tr>
-
-            <td>${curso.id}</td>
-
-            <td>${curso.titulo}</td>
-
-            <td>${curso.descricao}</td>
-
-            <td>${curso.cargaHoraria}</td>
-
-            <td>
-
-                <div class="acoes">
-                    <a
-                        class="botao botao-secundario"
-                        href="${createLink(
-                            controller: 'curso',
-                            action: 'edit',
-                            id: curso.id
-                        )}">
-                        Editar
-                    </a>
-
-                    <g:form
-                        controller="curso"
-                        action="delete"
-                        id="${curso.id}"
-                        method="POST">
-
-                        <button
-                            class="botao botao-perigo"
-                            type="submit"
-                            onclick="return confirm('Tem certeza que deseja remover este curso?');">
-                            Remover
+                        <g:form
+                            controller="curso"
+                            action="delete"
+                            id="${curso.id}"
+                            method="POST"
+                            data-confirm="Tem certeza que deseja que deseja remover o curso?">
+                        <button type="submit" class="btn excluir">
+                            <asset:image src="lixeira.svg" alt="" class="trash"/>
                         </button>
-                    </g:form>
-                </div>
-            </td>
-        </tr>
-    </g:each>
-    </tbody>
-</table>
-</body>
-</html>
+                        </g:form>
+                    </div>
+                </td>
+               </tr>
+            </g:each>
+
+            <tr class="linha-vazia" style="${cursos ? 'display:none' : ''}">
+                <td class="vazio" colspan="5">
+                    Nenhum curso encontrado
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="paginacao" id="paginacao-curso"></div>

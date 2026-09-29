@@ -1,115 +1,89 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
-<html>
-<head>
-    <title>Alunos</title>
-</head>
+<meta name="layout" content="main">
 
-<body>
+<title>Alunos</title>
+<h2 class="titulo-page">Alunos</h2>
+
 <div class="barra-acoes">
-    <h2>Alunos</h2>
+    <div class="busca">
+        <asset:image src="pesquisar.svg" alt=""/>
+    </div>
 
-    <a href="${createLink(controller: 'aluno', action: 'create')}"
-    class="botao botao-primario">
-        <div>
-            <asset:image
-                src="add.svg"
-                alt="adicionar"
-                class="add"/>
-        </div>
-        Novo Aluno
-    </a>
+    <input
+        type="search"
+        id="busca-alunos"
+        class="campo-busca"
+        placeholder="Pesquisar por nome, e-mail, ID..."/>
 </div>
 
-<form method="GET" action="${createLink(controller: 'aluno', action: 'index')}">
-    <input
-        class="campo-busca"
-        type="text"
-        name="busca"
-        value="${params.busca ?: ''}"
-        placeholder="Pesquisar por nome, e-mail ou ID...">
+<g:link controller="aluno" action="create" class="btn criar">
+    <asset:image src="add.svg" alt="" class="add"/>
+    Novo Aluno
+</g:link>
 
-    <button class="botao botao-secundario" type="submit">
-        <div>
-            <asset:image
-                src="pesquisar.sgv"
-                alt="pesquisar"
-                class="search"/>
-        </div>
-        Pesquisar
-    </button>
-</form>
+<div class="table">
+    <table
+        class="tabela"
+        data-tabela
+        data-busca="#busca-alunos"
+        data-paginacao="#paginacao-alunos">
 
-<br>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Data de Nascimento</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
 
-<table class="tabela">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>E-mail</th>
-        <th>Data de Nascimento</th>
-        <th>Ações</th>
-    </tr>
-    </thead>
-    <tbody>
-    <g:each in="${alunos}" var="aluno">
-        <tr>
-            <td>
-                ${aluno.id}
-            </td>
-            <td>
-                ${aluno.nome}
-            </td>
-            <td>
-                ${aluno.email}
-            </td>
-            <td>
-                <g:formatDate
-                    date="${aluno.dataNascimento}"
-                    format="dd-MM-yyyy"/>
-            </td>
-            <td>
-                <div class="acoes">
-                    <a href="${createLink(controller: 'aluno', action: 'edit', id: aluno.id)}"
-                    class="botao editar">
-                    <div>
-                        <asset:image
-                            src="editar.svg"
-                            alt="editar"
-                            class="edit"/>
-                    </div>
-                    </a>
+        <tbody>
+            <g:each var="aluno" in="${ alunos }">
+               <tr data-search="${aluno.id} ${aluno.email} ${aluno.dataNascimento}">
+                <td>${aluno.id}</td>
+                <td>${aluno.nome}</td>
+                <td>${aluno.email}</td>
+                <td>
+                    <g:formatDate
+                        date="${aluno.dataNascimento}"
+                        format="dd-MM-yyyy"
+                    />
+                </td>
 
-                    <g:form
-                        controller="aluno"
-                        action="delete"
-                        id="${aluno.id}"
-                        method="DELETE">
-                        <button
-                        class="botao"
-                        type="submit"
-                        onclick="return confirm('Tem certeza que deseja remover este aluno?');">
-                        <div>
-                            <asset:image
-                                src="lixeira.svg"
-                                alt="remover"
-                                class="delete"/>
-                        </div>
+                <td>
+                    <div class="acoes">
+                        <g:link
+                            controller="aluno"
+                            action="edit"
+                            id="${aluno.id}"
+                            class="btn editar">
+                        <asset:image src="editar.svg" alt="" class="edit"/> 
+                        </g:link>
+
+                        <g:form
+                            controller="aluno"
+                            action="delete"
+                            id="${aluno.id}"
+                            method="POST"
+                            data-confirm="Tem certeza que deseja que deseja remover o aluno?">
+                        <button type="submit" class="btn excluir">
+                            <asset:image src="lixeira.svg" alt="" class="trash"/>
                         </button>
-                    </g:form>
-                </div>
-            </td>
-        </tr>
-    </g:each>
+                        </g:form>
+                    </div>
+                </td>
+               </tr>
+            </g:each>
 
-    <g:if test="${!alunos}">
-        <tr>
-            <td colspan="5">
-                Nenhum aluno encontrado.
-            </td>
-        </tr>
-    </g:if>
-</table>
-</body>
-</html>
+            <tr class="linha-vazia" style="${alunos ? 'display:none' : ''}">
+                <td class="vazio" colspan="5">
+                    Nenhum aluno encontrado
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="paginacao" id="paginacao-alunos"></div>
