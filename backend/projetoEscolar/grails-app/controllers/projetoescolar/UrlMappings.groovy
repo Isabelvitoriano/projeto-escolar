@@ -28,7 +28,7 @@ class UrlMappings {
             action = [GET: "show", PUT: "update", DELETE: "delete"]
         }
 
-        "/"(view: "/index")
+        "/"(controller: 'aluno', action: 'index')
         "500"(view: "/error")
         "404"(view: "/notFound")
     }

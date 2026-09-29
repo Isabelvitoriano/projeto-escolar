@@ -1,86 +1,159 @@
 package projetoescolar
 
-import grails.converters.JSON
-
 class MatriculaController {
-
-    static responseFormats = ['json']
 
     MatriculaService matriculaService
 
     def index() {
-        respond matriculaService.listar()
+
+        def matriculas = matriculaService.listar()
+
+        [
+            matriculas: matriculas,
+            totalAlunos: Aluno.count(),
+            totalCursos: Curso.count(),
+            totalMatriculas: matriculas.size()
+        ]
     }
 
-    def show(Long id) {
-        def matricula = matriculaService.buscarId(id)
+    def create() {
 
-        if (matricula == null) {
-            render status: 404, text: 'Matricula não encontrado'
-            return
-        }
+        [
+            alunos: Aluno.list(sort: 'nome'),
+            cursos: Curso.list(sort: 'titulo'),
 
-        respond matricula
+            totalAlunos: Aluno.count(),
+            totalCursos: Curso.count(),
+            totalMatriculas: Matricula.count()
+        ]
     }
 
     def save() {
-        def aluno = Aluno.get(request.JSON.alunoId as Long)
-        def curso = Curso.get(request.JSON.cursoId as Long)
 
-        if (aluno == null) {
-            render status: 404, text: "Aluno não encontrado"
-            return
-        }
-
-        if (curso == null) {
-            render status: 404, text: "Curso não encontrado"
-            return
-        }
+        def aluno = Aluno.get(params.long('alunoId'))
+        def curso = Curso.get(params.long('cursoId'))
 
         def matricula = new Matricula(
-                dataMatricula: request.JSON.dataMatricula,
-                valorPago: request.JSON.valorPago,
                 aluno: aluno,
-                curso: curso
+                curso: curso,
+                dataMatricula: params.date(
+                        'dataMatricula',
+                        'yyyy-MM-dd'
+                ),
+                valorPago: params.bigDecimal(
+                        'valorPago'
+                )
         )
 
         if (!matricula.validate()) {
-            respond matricula.errors, status: 400
+
+            render(
+                    view: 'create',
+                    model: [
+                            matricula: matricula,
+                            alunos: Aluno.list(sort: 'nome'),
+                            cursos: Curso.list(sort: 'titulo'),
+                            totalAlunos: Aluno.count(),
+                            totalCursos: Curso.count(),
+                            totalMatriculas: Matricula.count()
+                    ]
+            )
+
             return
         }
 
         matriculaService.salvar(matricula)
-        respond matricula, status: 201
+
+        flash.message = 'Matrícula cadastrada com sucesso.'
+
+        redirect(action: 'index')
+    }
+
+    def edit(Long id) {
+
+        def matricula = matriculaService.buscarId(id)
+
+        if (!matricula) {
+
+            flash.error = 'Matrícula não encontrada.'
+
+            redirect(action: 'index')
+
+            return
+        }
+
+        [
+            matricula: matricula,
+            alunos: Aluno.list(sort: 'nome'),
+            cursos: Curso.list(sort: 'titulo'),
+            totalAlunos: Aluno.count(),
+            totalCursos: Curso.count(),
+            totalMatriculas: Matricula.count()
+        ]
     }
 
     def update(Long id) {
 
         def matricula = matriculaService.buscarId(id)
 
-        if (matricula == null) {
-            render status: 404, text: 'Matricula não encontrado'
+        if (!matricula) {
+
+            flash.error = 'Matrícula não encontrada.'
+
+            redirect(action: 'index')
+
             return
         }
 
-        bindData(matricula, request.JSON)
+        matricula.aluno =
+                Aluno.get(params.long('alunoId'))
+
+        matricula.curso =
+                Curso.get(params.long('cursoId'))
+
+        matricula.dataMatricula =
+                params.date(
+                        'dataMatricula',
+                        'yyyy-MM-dd'
+                )
+
+        matricula.valorPago =
+                params.bigDecimal('valorPago')
 
         if (!matricula.validate()) {
-            respond matricula.errors, status: 400
+
+            render(
+                    view: 'edit',
+                    model: [
+                            matricula: matricula,
+                            alunos: Aluno.list(sort: 'nome'),
+                            cursos: Curso.list(sort: 'titulo'),
+                            totalAlunos: Aluno.count(),
+                            totalCursos: Curso.count(),
+                            totalMatriculas: Matricula.count()
+                    ]
+            )
+
             return
         }
 
         matriculaService.atualizar(matricula)
-        respond matricula
+
+        flash.message = 'Matrícula atualizada com sucesso.'
+
+        redirect(action: 'index')
     }
 
     def delete(Long id) {
+
         def removido = matriculaService.excluir(id)
 
         if (!removido) {
-            render status: 404, text: 'Matricula não encontrado'
-            return
+            flash.error = 'Matrícula não encontrada.'
+        } else {
+            flash.message = 'Matrícula removida com sucesso.'
         }
 
-        render status: 204
+        redirect(action: 'index')
     }
 }

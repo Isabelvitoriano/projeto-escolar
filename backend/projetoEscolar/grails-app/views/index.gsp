@@ -13,9 +13,9 @@
 <!doctype html>
 <html>
 <head>
-    <title>Welcome to Grails</title>
+    <title>DevSchool</title>
     <meta name="layout" content="main"/>
-    <asset:stylesheet src="welcome.css"/>
+    <asset:stylesheet src=".css"/>
 </head>
 <body>
 <main id="content" role="main" class="pb-4 pb-md-5">

@@ -1,73 +1,132 @@
 package projetoescolar
 
-import grails.converters.JSON
-
 class CursoController {
-
-    static responseFormats = ['json']
 
     CursoService cursoService
 
     def index() {
-        respond cursoService.listar()
+
+        def cursos = cursoService.listar()
+
+        [
+            cursos: cursos,
+            totalAlunos: Aluno.count(),
+            totalCursos: cursos.size(),
+            totalMatriculas: Matricula.count()
+        ]
     }
 
-    def show(Long id) {
-        def curso = cursoService.buscarId(id)
+    def create() {
 
-        if (curso == null) {
-            render status: 404, text: 'Curso não encontrado'
-            return
-        }
-
-        respond curso
+        [
+            totalAlunos: Aluno.count(),
+            totalCursos: Curso.count(),
+            totalMatriculas: Matricula.count()
+        ]
     }
 
     def save() {
 
         def curso = new Curso(
-                titulo: request.JSON.titulo,
-                descricao: request.JSON.descricao,
-                cargaHoraria: request.JSON.cargaHoraria
+                titulo: params.titulo,
+                descricao: params.descricao,
+                cargaHoraria: params.int(
+                        'cargaHoraria'
+                )
         )
 
         if (!curso.validate()) {
-            respond curso.errors, status: 400
+
+            render(
+                    view: 'create',
+                    model: [
+                            curso: curso,
+                            totalAlunos: Aluno.count(),
+                            totalCursos: Curso.count(),
+                            totalMatriculas: Matricula.count()
+                    ]
+            )
+
             return
         }
 
         cursoService.salvar(curso)
-        respond curso, status: 201
+
+        flash.message = 'Curso cadastrado com sucesso.'
+
+        redirect(action: 'index')
+    }
+
+    def edit(Long id) {
+
+        def curso = cursoService.buscarId(id)
+
+        if (!curso) {
+
+            flash.error = 'Curso não encontrado.'
+
+            redirect(action: 'index')
+
+            return
+        }
+
+        [
+            curso: curso,
+            totalAlunos: Aluno.count(),
+            totalCursos: Curso.count(),
+            totalMatriculas: Matricula.count()
+        ]
     }
 
     def update(Long id) {
 
         def curso = cursoService.buscarId(id)
 
-        if (curso == null) {
-            render status: 404, text: 'Curso não encontrado'
+        if (!curso) {
+
+            flash.error = 'Curso não encontrado.'
+
+            redirect(action: 'index')
+
             return
         }
 
-        bindData(curso, request.JSON)
+        curso.titulo = params.titulo
+        curso.descricao = params.descricao
+        curso.cargaHoraria = params.int('cargaHoraria')
 
         if (!curso.validate()) {
-            respond curso.errors, status: 400
+
+            render(
+                    view: 'edit',
+                    model: [
+                            curso: curso,
+                            totalAlunos: Aluno.count(),
+                            totalCursos: Curso.count(),
+                            totalMatriculas: Matricula.count()
+                    ]
+            )
+
             return
         }
 
         cursoService.atualizar(curso)
-        respond curso
+
+        flash.message = 'Curso atualizado com sucesso.'
+
+        redirect(action: 'index')
     }
 
     def delete(Long id) {
+
         def removido = cursoService.excluir(id)
 
         if (!removido) {
-            render status: 404, text: 'Curso não encontrado'
-            return
+            flash.error = 'Curso não encontrado.'
+        } else {
+            flash.message = 'Curso removido com sucesso.'
         }
 
-        render status: 204
+        redirect(action: 'index')
     }
 }

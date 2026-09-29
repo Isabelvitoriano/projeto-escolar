@@ -9,65 +9,94 @@ class AlunoController {
     AlunoService alunoService
 
     def index() {
-        respond alunoService.listar()
+        def alunos = respond alunoService.listar()
+
+        [
+            alunos: alunos,
+            totalAlunos: alunos.size(),
+            totalCursos: Curso.count(),
+            totalMatriculas: Matricula.coun()
+        ]
     }
 
-    def show(Long id) {
-        def aluno = alunoService.buscarId(id)
-
-        if (aluno == null) {
-            render status: 404, text: 'Aluno não encontrado'
-            return
-        }
-
-        respond aluno
+    def create() {
+        [
+            totalAlunos: Aluno.count(),
+            totalCursos = Curso.count(),
+            totalMatriculas = Matricula.count()
+        ]
     }
 
     def save() {
 
         def aluno = new Aluno(
-                nome: request.JSON.nome,
-                email: request.JSON.email,
-                dataNascimento: request.JSON.dataNascimento
+                nome: params.nome,
+                email: params.email,
+                dataNascimento: params.date(
+                    'dataNascimento',
+                    'yyyy-MM-dd'
+                )
         )
 
         if (!aluno.validate()) {
-            respond aluno.errors, status: 400
+            render(
+                view: 'create'
+                model: [
+                    aluno: aluno,
+                    totalAlunos: Aluno.count(),
+                    totalCursos: Curso.count(),
+                    totalMatriculas: Matricula.count()
+                ]
+            )
             return
         }
 
         alunoService.salvar(aluno)
-        respond aluno, status: 201
+        flash.message = 'Aluno cadastrado com sucesso.'
+        redirect(action:'index')
     }
 
     def update(Long id) {
 
         def aluno = alunoService.buscarId(id)
 
-        if (aluno == null) {
-            render status: 404, text: 'Aluno não encontrado'
+        if(!aluno) {
+            flash.error = 'Aluno não encontrado.'
+            redirect(action:'index')
             return
         }
 
-        bindData(aluno, request.JSON)
+        aluno.nome = params.nome
+        aluno.email = params.email
+        aluno.dataNascimento =
+            params.date('dataNascimento', 'yyyy-MM-dd')
 
-        if (!aluno.validate()) {
-            respond aluno.errors, status: 400
-            return
+        if(!aluno.validate()) {
+            render(
+                view: 'edit',
+                model: [
+                    aluno: aluno,
+                    totalAlunos: Aluno.count(),
+                    totalCursos: Curso.count(),
+                    totalMatriculas: Matricula.count()
+                ]
+            )
         }
 
         alunoService.atualizar(aluno)
-        respond aluno
+        flash.message = 'Aluno atualizado com sucesso.'
+        redirect(action:'index')
     }
 
     def delete(Long id) {
         def removido = alunoService.excluir(id)
 
         if (!removido) {
-            render status: 404, text: 'Aluno não encontrado'
-            return
+            flash.error = 'Aluno não encontrado.'
+        } else {
+            flash.message = "Aluno removido com sucesso."
         }
 
-        render status: 204
+        redirect(action:'index')
     }
 }

@@ -1,14 +1,50 @@
-/*
-* This is a manifest file that'll be compiled into application.css, which will include all the files
-* listed below.
-*
-* Any CSS file within this directory can be referenced here using a relative path.
-*
-* You're free to add application-wide styles to this file and they'll appear at the top of the
-* compiled file, but it's generally better to create a new file per style scope.
-*
-*= require webjars/bootstrap/%/dist/css/bootstrap.css
-*= require webjars/bootstrap-icons/%/font/bootstrap-icons.css
-*= require grails.css
-*= require_self
-*/
+:root {
+    --primaria: #182739;
+    --cabecalho: #032448;
+    --cor-fundo: #f4f7fb;
+    --branco: #fff;
+    --branco-opacity: rgba(255, 255, 255, 0.6);
+    --texto: rgba(24, 39, 57, 0.6);
+    --texto-select: rgba(24, 39, 57, 0.8);
+    --link: #386fa4;
+    --link-text: #0c84f3;
+    --link-opacity: rgba(24, 39, 57, 0.5);
+    --danger: #e70000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'poppins', sans-serif;
+}
+
+body {
+    background-color: var(--cor-fundo);
+}
+
+img {
+    width: 20px;
+}
+.conteudo {
+    padding: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.barra-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.barra-acoes .ant-input-affix-wrapper {
+    max-width: 360px;
+}
+
+.icone-busca {
+    width: 16px;
+    height: 16px;
+}
