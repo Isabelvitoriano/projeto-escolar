@@ -24,6 +24,8 @@ class UrlMappings {
         '/matriculas/$id/atualizar'(controller: 'matricula', action: 'update', method: 'POST')
         '/matriculas/excluir'(controller: 'matricula', action: 'delete', method: 'POST')
 
+        "/$controller/$action?/$id?()"{}
+
         "/"(controller: 'aluno', action: 'index')
         "500"(view: "/error")
         "404"(view: "/notFound")

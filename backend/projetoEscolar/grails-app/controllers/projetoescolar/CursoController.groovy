@@ -41,10 +41,11 @@ class CursoController {
         }
         cursoService.salvar(curso)
         flash.message = 'Curso cadastrado com sucesso'
-        redirect(action: 'index')
+        redirect(uri: '/cursos')
     }
 
-    def update(Long id) {
+    def update() {
+        Long id = params.long('id')
         def curso = cursoService.buscarId(id)
 
         if (!curso) {
@@ -67,7 +68,7 @@ class CursoController {
         }
         cursoService.atualizar(curso)
         flash.message = 'Curso atualizado com sucesso'
-        redirect(action: 'index')
+        redirect(uri: '/cursos')
     }
 
     def delete(Long id) {
@@ -76,6 +77,6 @@ class CursoController {
         } else {
             flash.message = 'Curso removido com sucesso'
         }
-        redirect(action: 'index')
+        redirect(uri: '/cursos')
     }
 }

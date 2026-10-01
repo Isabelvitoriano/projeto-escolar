@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <meta name="layout" content="main">
 
-<title>Novo curso</title>
+<title>Novo Curso</title>
 
 <div class="card">
     <div class="card-header">
@@ -25,14 +25,12 @@
         method="POST"
         class="formulario">
 
-        <g:render
-            template="form"
-            model="[curso: curso]"/>
+        <g:render template="form" model="[curso: curso]"/>
 
         <div class="form-acoes">
             <g:submitButton
                 name="salvar"
-                value="Cadastrar curso"
+                value="Cadastrar"
                 class="btn salvar"/>
 
             <g:link

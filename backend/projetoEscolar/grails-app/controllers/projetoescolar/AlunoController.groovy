@@ -47,7 +47,7 @@ class AlunoController {
         }
         alunoService.salvar(aluno)
         flash.message = 'Aluno cadastrado com sucesso'
-        redirect(action: 'index')
+        redirect(uri: '/alunos')
     }
 
     def update(Long id) {
@@ -79,7 +79,7 @@ class AlunoController {
         }
         alunoService.atualizar(aluno)
         flash.message = 'Aluno atualizado com sucesso'
-        redirect(action: 'index')
+        redirect(uri: '/alunos')
     }
 
     def delete(Long id) {
@@ -88,6 +88,6 @@ class AlunoController {
         } else {
             flash.message = 'Aluno removido com sucesso'
         }
-        redirect(action: 'index')
+        redirect(uri: '/alunos')
     }
 }

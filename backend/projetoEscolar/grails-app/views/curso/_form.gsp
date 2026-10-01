@@ -6,50 +6,44 @@
         id="titulo"
         value="${curso?.titulo}"
         required="true"/>
-
-    <g:hasError bean="${curso}" field="titulo">
-        <div class="erro-campo">
-            <g:fieldError
-                bean="${curso}"
-                field="titulo"/>
+    
+    <g:hasErrors bean="${curso}" field="titulo">
+        <div class="campo-erro">
+            <g:fieldError bean="${curso}" field="titulo"/>
         </div>
-    </g:hasError>
+    </g:hasErrors>
 </div>
 
 <div class="form-grupo">
     <label for="descricao">Descrição</label>
 
-    <g:textField
+    <g:textArea
         name="descricao"
         id="descricao"
         value="${curso?.descricao}"
         rows="4"/>
-
-    <g:hasError bean="${curso}" field="descricao">
-        <div class="erro-campo">
-            <g:fieldError
-                bean="${curso}"
-                field="descricao"/>
+    
+    <g:hasErrors bean="${curso}" field="descricao">
+        <div class="campo-erro">
+            <g:fieldError bean="${curso}" field="descricao"/>
         </div>
-    </g:hasError>
+    </g:hasErrors>
 </div>
 
 <div class="form-grupo">
     <label for="cargaHoraria">Carga Horária</label>
 
-    <g:textField
+    <g:field
         type="number"
         name="cargaHoraria"
         id="cargaHoraria"
         value="${curso?.cargaHoraria}"
         min="1"
         required="true"/>
-
-    <g:hasError bean="${curso}" field="cargaHoraria">
-        <div class="erro-campo">
-            <g:fieldError
-                bean="${curso}"
-                field="cargaHoraria"/>
+    
+    <g:hasErrors bean="${curso}" field="cargaHoraria">
+        <div class="campo-erro">
+            <g:fieldError bean="${curso}" field="cargaHoraria"/>
         </div>
-    </g:hasError>
+    </g:hasErrors>
 </div>
