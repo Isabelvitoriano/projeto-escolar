@@ -1,44 +1,26 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<meta name="layout" content="main">
+<!doctype html>
+<html>
+<head>
+    <meta name="layout" content="main">
+    <title>Novo Aluno</title>
+</head>
+<body>
 
-<title>Novo Aluno</title>
-
-<div class="card">
-    <div class="card-header">
-
-        <h2>Novo aluno</h2>
-
-        <g:link
-            controller="aluno"
-            action="index"
-            class="btn voltar">
-
-            <asset:image src="voltar.svg" alt="" class="back"/>
-            Voltar
-        </g:link>
-
+<div class="card formulario">
+    <div class="card-cabecalho">
+        <h2>Novo Aluno</h2>
     </div>
 
-    <g:form
-        controller="aluno"
-        action="save"
-        method="POST"
-        class="formulario">
-
-        <g:render template="form" model="[aluno: aluno]"/>
+    <g:form controller="aluno" action="save" method="POST">
+        <g:render template="form"/>
 
         <div class="form-acoes">
-            <g:submitButton
-                name="salvar"
-                value="Cadastrar"
-                class="btn salvar"/>
-
-            <g:link
-                controller="aluno"
-                action="index"
-                class="btn cancelar">
-                Cancelar
-            </g:link>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <g:link controller="aluno" action="index" class="btn">Cancelar</g:link>
         </div>
     </g:form>
 </div>
+
+</body>
+</html>

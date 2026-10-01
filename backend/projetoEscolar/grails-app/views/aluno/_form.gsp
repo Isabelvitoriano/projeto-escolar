@@ -1,49 +1,25 @@
-<div class="form-grupo">
-    <label for="nome">Nome</label>
+<%@ page contentType="text/html;charset=UTF-8" %>
 
-    <g:textField
-        name="nome"
-        id="nome"
-        value="${aluno?.nome}"
-        required="true"/>
-    
+<div class="form-grupo">
+    <label for="nome">Nome completo *</label>
+    <input type="text" id="nome" name="nome" value="${aluno?.nome}" required placeholder="Ex: João Silva"/>
     <g:hasErrors bean="${aluno}" field="nome">
-        <div class="campo-erro">
-            <g:fieldError bean="${aluno}" field="nome"/>
-        </div>
+        <div class="erro-campo"><g:message error="${it}"/></div>
     </g:hasErrors>
 </div>
 
 <div class="form-grupo">
-    <label for="email">Email</label>
-
-    <g:field
-        type="email"
-        name="email"
-        id="email"
-        value="${aluno?.email}"
-        required="true"/>
-    
+    <label for="email">E-mail *</label>
+    <input type="email" id="email" name="email" value="${aluno?.email}" required placeholder="exemplo@email.com"/>
     <g:hasErrors bean="${aluno}" field="email">
-        <div class="campo-erro">
-            <g:fieldError bean="${aluno}" field="email"/>
-        </div>
+        <div class="erro-campo"><g:message error="${it}"/></div>
     </g:hasErrors>
 </div>
 
 <div class="form-grupo">
-    <label for="dataNascimento">Data de Nascimento</label>
-
-    <g:field
-        type="date"
-        name="dataNascimento"
-        id="dataNascimento"
-        value="${aluno?.dataNascimento ? formatDate(date: aluno.dataNascimento, format: 'dd-MM-yyyy') :  ''}"
-        required="true"/>
-    
+    <label for="dataNascimento">Data de Nascimento *</label>
+    <input type="date" name="dataNascimento" value="${g.formatDate(date: aluno?.dataNascimento, format: 'yyyy-MM-dd')}" />
     <g:hasErrors bean="${aluno}" field="dataNascimento">
-        <div class="campo-erro">
-            <g:fieldError bean="${aluno}" field="dataNascimento"/>
-        </div>
+        <div class="erro-campo"><g:message error="${it}"/></div>
     </g:hasErrors>
 </div>

@@ -1,49 +1,25 @@
-<div class="form-grupo">
-    <label for="titulo">Título</label>
+<%@ page contentType="text/html;charset=UTF-8" %>
 
-    <g:textField
-        name="titulo"
-        id="titulo"
-        value="${curso?.titulo}"
-        required="true"/>
-    
+<div class="form-grupo">
+    <label for="titulo">Título do Curso</label>
+    <input type="text" id="titulo" name="titulo" value="${curso?.titulo}" required placeholder="Ex: Ciência da Computação"/>
     <g:hasErrors bean="${curso}" field="titulo">
-        <div class="campo-erro">
-            <g:fieldError bean="${curso}" field="titulo"/>
-        </div>
+        <div class="erro-campo"><g:message error="${it}"/></div>
     </g:hasErrors>
 </div>
 
 <div class="form-grupo">
     <label for="descricao">Descrição</label>
-
-    <g:textArea
-        name="descricao"
-        id="descricao"
-        value="${curso?.descricao}"
-        rows="4"/>
-    
+    <textarea id="descricao" name="descricao" rows="4" placeholder="Descreva o conteúdo do curso...">${curso?.descricao}</textarea>
     <g:hasErrors bean="${curso}" field="descricao">
-        <div class="campo-erro">
-            <g:fieldError bean="${curso}" field="descricao"/>
-        </div>
+        <div class="erro-campo"><g:message error="${it}"/></div>
     </g:hasErrors>
 </div>
 
 <div class="form-grupo">
     <label for="cargaHoraria">Carga Horária</label>
-
-    <g:field
-        type="number"
-        name="cargaHoraria"
-        id="cargaHoraria"
-        value="${curso?.cargaHoraria}"
-        min="1"
-        required="true"/>
-    
+    <input type="number" value="${curso?.cargaHoraria}" id="cargaHoraria" name="cargaHoraria" min="1" required></field>
     <g:hasErrors bean="${curso}" field="cargaHoraria">
-        <div class="campo-erro">
-            <g:fieldError bean="${curso}" field="cargaHoraria"/>
-        </div>
+        <div class="erro-campo"><g:message error="${it}"/></div>
     </g:hasErrors>
 </div>

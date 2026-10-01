@@ -1,5 +1,7 @@
 package projetoescolar
 
+import java.text.SimpleDateFormat
+
 class AlunoController {
 
     AlunoService alunoService
@@ -28,13 +30,12 @@ class AlunoController {
     }
 
     def save() {
+        def dateFormat = new SimpleDateFormat("yyyy-MM-dd")
+
         def aluno = new Aluno(
             nome: params.nome,
             email: params.email,
-            dataNascimento: parse.Date(
-                params.dataNascimento
-            )
-        )
+            dataNascimento: params.dataNascimento ? dateFormat.parse(params.dataNascimento) : null
 
         if (!aluno.validate()) {
             render(

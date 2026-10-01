@@ -1,20 +1,15 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <!doctype html>
 <html>
-    <head>
-        <title>Page Not Found</title>
-        <meta name="layout" content="main">
-        <g:if env="development"><asset:stylesheet src="errors.css"/></g:if>
-    </head>
-    <body>
-        <div id="content" role="main">
-            <div class="container">
-                <section class="row">
-                    <div class="alert alert-danger" role="alert">
-                        <h1>Error: Page Not Found (404)</h1>
-                        <div><i class="bi-exclamation-circle"></i> Path: ${request.forwardURI}</div>
-                    </div>
-                </section>
-            </div>
-        </div>
-    </body>
+<head>
+    <meta name="layout" content="main">
+    <title>Página não encontrada</title>
+</head>
+<body>
+    <div class="card not-found">
+        <h2>${titulo ?: 'Página não encontrada'}</h2>
+        <p>O recurso que você tentou acessar não existe ou foi removido.</p>
+        <g:link controller="aluno" action="index" class="btn btn-primary">Voltar ao início</g:link>
+    </div>
+</body>
 </html>

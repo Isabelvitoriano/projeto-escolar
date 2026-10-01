@@ -15,7 +15,7 @@
 <body>
 <header class="cabecalho">
     <div class="icon">
-        <asset:image src="icone.svg" alt="DevSchool" class="icon"/>
+        <asset:image src="icon.svg" alt="DevSchool" class="icon"/>
     </div>
 
     <div class="titulo">
