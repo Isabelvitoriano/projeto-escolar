@@ -8,20 +8,25 @@
 <body>
 
 <div class="card formulario">
-    <div class="card-cabecalho">
+    <div class="card-header">
         <h2>Editar Matrícula</h2>
-        <button type="button" class="btn btn-small" data-compartilhar>Compartilhar formulário</button>
+        <button type="button" class="btn share" data-compartilhar>
+            <asset:image src="compartilhar.svg" alt=""/>
+            Compartilhar formulário
+        </button>
     </div>
 
     <g:form controller="matricula" action="update" id="${matricula.id}" method="POST">
         <g:render template="form"/>
 
         <div class="form-acoes">
-            <button type="submit" class="btn btn-primary">Atualizar</button>
-            <g:link controller="matricula" action="index" class="btn">Cancelar</g:link>
+            <button type="submit" class="btn atualizar">
+                <asset:image src="resetar.svg" alt=""/>
+                Atualizar
+            </button>
+            <g:link controller="matricula" action="index" class="btn cancel">Cancelar</g:link>
         </div>
     </g:form>
 </div>
-
 </body>
 </html>

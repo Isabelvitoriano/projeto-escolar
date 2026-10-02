@@ -35,7 +35,7 @@ class AlunoController {
         def aluno = new Aluno(
             nome: params.nome,
             email: params.email,
-            dataNascimento: params.dataNascimento ? dateFormat.parse(params.dataNascimento) : null
+            dataNascimento: params.dataNascimento ? dateFormat.parse(params.dataNascimento) : null)
 
         if (!aluno.validate()) {
             render(

@@ -12,14 +12,17 @@
         <h2>Novo Curso</h2>
         <button type="button" class="btn share" data-compartilhar>
         <asset:image src="compartilhar.svg" alt=""/>
-        Compartilhar formulário</button>
+        Compartilhar</button>
     </div>
 
     <g:form controller="curso" action="save" method="POST">
         <g:render template="form"/>
 
         <div class="form-acoes">
-            <button type="submit" class="btn save"><asset:image src="salvar.svg" alt=""/>Cadastrar</button>
+            <button type="submit" class="btn save">
+                <asset:image src="salvar.svg" alt=""/>
+                Cadastrar
+            </button>
             <g:link controller="curso" action="index" class="btn cancel">Cancelar</g:link>
         </div>
     </g:form>

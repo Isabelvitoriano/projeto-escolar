@@ -8,19 +8,24 @@
 <body>
 
 <div class="card formulario">
-    <div class="card-cabecalho">
+    <div class="card-header">
         <h2>Novo Aluno</h2>
+        <button type="button" class="btn share" data-compartilhar>
+        <asset:image src="compartilhar.svg" alt=""/>
+        Compartilhar</button>
     </div>
 
     <g:form controller="aluno" action="save" method="POST">
         <g:render template="form"/>
 
         <div class="form-acoes">
-            <button type="submit" class="btn btn-primary">Salvar</button>
-            <g:link controller="aluno" action="index" class="btn">Cancelar</g:link>
+            <button type="submit" class="btn save">
+                <asset:image src="salvar.svg" alt=""/>
+                Cadastrar
+            </button>
+            <g:link controller="aluno" action="index" class="btn cancel">Cancelar</g:link>
         </div>
     </g:form>
 </div>
-
 </body>
 </html>

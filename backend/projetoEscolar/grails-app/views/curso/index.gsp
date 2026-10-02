@@ -19,7 +19,7 @@
     </div>
 </div>
 
-<div class="tabela-wrapper">
+<div class="visualizacao">
     <table class="tabela" data-tabela data-busca="#busca-cursos">
         <thead>
             <tr>
