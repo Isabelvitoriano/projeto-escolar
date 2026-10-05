@@ -13,6 +13,7 @@
     --link-opacity: rgba(24, 39, 57, 0.5);
     --danger: #e70000;
     --claro: rgba(24, 39, 57, 0.1);
+    --azul-claro: rgba(12, 132, 243, 0.5);
 }
 
 * {
@@ -81,7 +82,7 @@ a {
     gap: 10px;
     align-items: center;
     color: var(--link-opacity);
-    font-weight: 500;
+    font-weight: 400;
 
     #icon-menu {
         width: 20px;
@@ -122,21 +123,22 @@ a {
 
 .barra-acoes {
     display: flex;
-    width: fit-content;
+    justify-content: space-between;
+    max-width: 800px;
     padding: 10px;
     background-color: var(--branco);
     margin: auto;
     border-radius: 20px;
     border: var(--claro) solid 1px;
-    gap: 30vw;
+    margin-bottom: 20px;
 }
 
 .busca {
     display: flex;
-    gap: 20px;
+    gap: 14px;
     border: var(--claro) solid 1px;
     padding: 10px;
-    border-radius: 20px;
+    border-radius: 10px;
     background-color: var(--cor-fundo);
 
     .campo-busca {
@@ -156,18 +158,140 @@ a {
 .criar {
     background-color: var(--link-text);
     padding: 10px 20px;
-    border-radius: 20px;
+    border-radius: 16px;
     display: flex;
 
-    .btn{
+    .create-btn {
         display: flex;
         align-items: center;
         gap: 10px;
         color: var(--branco);
+        font-weight: 500;
     }
 
     #add {
         width: 20px;
         height: auto;
+    }
+}
+
+.criar:hover {
+    cursor: pointer;
+    background-color: rgb(11, 118, 218);
+}
+
+
+/* -----------VISUALIZAÇÃO: TABELA----------- */
+
+.visualizacao {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    border: var(--claro) solid 1px;
+    border-radius: 20px;
+}
+
+.titulo-page {
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-bottom: var(--claro) solid 1px;
+    color: var(--cabecalho);
+}
+
+.tabela {
+    border-collapse: collapse;
+    border-radius: 20px;
+    background-color: var(--branco);
+}
+
+.tabela-header {
+    font-size: 14px;
+    background-color: var(--cor-fundo);
+
+    th {
+        font-weight: 500;
+        padding: 10px 20px;
+        color: var(--texto);
+    }
+}
+
+.tabela-body {
+    border-radius: 20px;
+    text-align: justify;
+    font-size: 14px;
+
+    td {
+        padding: 20px 35px;
+        border-top: var(--claro) solid 1px;
+    }
+
+    #coluna-center {
+        text-align: center;
+    }
+
+    .acoes {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+
+        .editar {
+            color: var(--link-opacity);
+
+            #edit {
+                width: 20px;
+                height: auto;
+            }
+        }
+
+        .remover {
+            border: none;
+            background: none;
+            color: var(--link-opacity);
+
+            #trash {
+                width: 20px;
+                height: auto;
+            }
+        }
+    }
+}
+
+.editar:hover {
+    cursor: pointer;
+    color: var(--azul-claro) !important;
+}
+
+.remover:hover {
+    cursor: pointer;
+    color: var(--danger) !important;
+}
+
+
+/* -----------VISUALIZAÇÃO: TABELA DE CURSOS----------- */
+
+.cursos {
+    max-width: 800px;
+
+    .tabela-body {
+        td {
+            text-align: start;
+        }
+    }
+}
+
+
+/* -----------VISUALIZAÇÃO: TABELA DE MATRÍCULAS----------- */
+.matriculas {
+    max-width: 800px;
+
+    .tabela-body {
+        td {
+            text-align: start;
+            padding: 20px 32px;
+        }
     }
 }
