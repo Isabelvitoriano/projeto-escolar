@@ -65,9 +65,7 @@ class AlunoController {
         }
         aluno.nome = params.nome
         aluno.email = params.email
-        aluno.dataNascimento = parse.Date(
-            params.dataNascimento
-        )
+        aluno.dataNascimento = params.date('dataNascimento', 'yyyy-MM-dd')
 
         if (!aluno.validate()) {
             render(
