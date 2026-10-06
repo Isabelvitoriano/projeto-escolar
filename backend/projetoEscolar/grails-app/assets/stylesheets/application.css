@@ -27,16 +27,8 @@ body {
     background-color: var(--cor-fundo);
 }
 
-img {
-    width: 20px;
-}
-
 a {
     text-decoration: none;
-}
-
-.btn:hover {
-    cursor: pointer;
 }
 
 
@@ -199,13 +191,16 @@ a {
     font-weight: 600;
     padding: 10px 20px;
     border-bottom: var(--claro) solid 1px;
-    color: var(--cabecalho);
+    color: var(--primaria);
+    background-color: var(--claro);
+    border-radius: 20px 20px 0 0;
 }
 
 .tabela {
     border-collapse: collapse;
     border-radius: 20px;
     background-color: var(--branco);
+    width: 800px;
 }
 
 .tabela-header {
@@ -466,5 +461,26 @@ a {
 }
 
 
-/* -----------FORMULÁRIO: CREATE CURSO----------- */
+/* -----------ALERTAS----------- */
 
+.alerta {
+    display: flex;
+    background-color: var(--link);
+    color: var(--branco);
+    padding: 10px 20px;
+    position: absolute;
+    justify-self: center;
+    top: 10px;
+    border-radius: 10px;
+    animation: sumindo 1s forwards;
+    animation-delay: 2s;
+}
+
+@keyframes sumindo {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}

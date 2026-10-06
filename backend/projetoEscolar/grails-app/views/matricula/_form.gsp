@@ -25,8 +25,22 @@
         </select>
     </div>
 
-    <div class="itens-form">
-        <label for="dataMatricula">DATA DA MATRÍCULA</label>
-        <input type="date" name="dataMatricula" value="${formatDate(date: matricula?.dataMatricula ?: new Date(), format: 'yyyy-MM-dd')}" />
+    <div class="form-duo">
+        <div class="itens-form">
+            <label for="dataMatricula">DATA DA MATRÍCULA</label>
+            <input type="date" name="dataMatricula" value="${formatDate(date: matricula?.dataMatricula ?: new Date(), format: 'yyyy-MM-dd')}" />
+        </div>
+
+        <div class="itens-form">
+            <label for="valorPago">VALOR PAGO (R$)</label>
+            <input type="number" 
+                id="valorPago" 
+                name="valorPago" 
+                step="0.01" 
+                min="0" 
+                placeholder="0,00"
+                value="${matricula?.valorPago}" 
+                required />
+        </div>
     </div>
 </div>

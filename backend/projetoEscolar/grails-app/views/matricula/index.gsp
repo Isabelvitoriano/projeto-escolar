@@ -69,10 +69,10 @@
                                 </g>
                                 </g>
                                 </g>
-                                </svg>
+                            </svg>
                         </g:link>
                         <g:form controller="matricula" action="delete" id="${matricula.id}" method="POST" data-confirm="Tem certeza que deseja cancelar esta matrícula?">
-                            <button type="submit" class="btn remover">
+                            <button type="submit" class="remover">
                                     <svg id="trash" width="800px" height="800px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M160 256H96a32 32 0 0 1 0-64h256V95.936a32 32 0 0 1 32-32h256a32 32 0 0 1 32 32V192h256a32 32 0 1 1 0 64h-64v672a32 32 0 0 1-32 32H192a32 32 0 0 1-32-32V256zm448-64v-64H416v64h192zM224 896h576V256H224v640zm192-128a32 32 0 0 1-32-32V416a32 32 0 0 1 64 0v320a32 32 0 0 1-32 32zm192 0a32 32 0 0 1-32-32V416a32 32 0 0 1 64 0v320a32 32 0 0 1-32 32z"/></svg>
                             </button>
                         </g:form>

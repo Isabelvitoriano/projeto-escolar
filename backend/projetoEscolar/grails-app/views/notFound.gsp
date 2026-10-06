@@ -9,7 +9,7 @@
     <div class="card not-found">
         <h2>${titulo ?: 'Página não encontrada'}</h2>
         <p>O recurso que você tentou acessar não existe ou foi removido.</p>
-        <g:link controller="aluno" action="index" class="btn btn-primary">Voltar ao início</g:link>
+        <g:link controller="aluno" action="index">Voltar ao início</g:link>
     </div>
 </body>
 </html>

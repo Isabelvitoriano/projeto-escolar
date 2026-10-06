@@ -27,6 +27,29 @@ class MatriculaController {
             totalMatriculas: Matricula.count()
         ]
     }
+    
+    def edit(Long id) {
+
+        def matricula = matriculaService.buscarId(id)
+
+        if (!matricula) {
+
+            flash.error = 'Matrícula não encontrada.'
+
+            redirect(uri: '/matriculas')
+
+            return
+        }
+
+        [
+            matricula: matricula,
+            alunos: Aluno.list(sort: 'nome'),
+            cursos: Curso.list(sort: 'titulo'),
+            totalAlunos: Aluno.count(),
+            totalCursos: Curso.count(),
+            totalMatriculas: Matricula.count()
+        ]
+    }
 
     def save() {
 
@@ -40,9 +63,7 @@ class MatriculaController {
                         'dataMatricula',
                         'yyyy-MM-dd'
                 ),
-                valorPago: params.bigDecimal(
-                        'valorPago'
-                )
+                valorPago: params.valorPago ? (params.valorPago as BigDecimal) : null
         )
 
         if (!matricula.validate()) {
@@ -66,31 +87,9 @@ class MatriculaController {
 
         flash.message = 'Matrícula cadastrada com sucesso.'
 
-        redirect(action: 'index')
+        redirect(uri: '/matriculas')
     }
 
-    def edit(Long id) {
-
-        def matricula = matriculaService.buscarId(id)
-
-        if (!matricula) {
-
-            flash.error = 'Matrícula não encontrada.'
-
-            redirect(action: 'index')
-
-            return
-        }
-
-        [
-            matricula: matricula,
-            alunos: Aluno.list(sort: 'nome'),
-            cursos: Curso.list(sort: 'titulo'),
-            totalAlunos: Aluno.count(),
-            totalCursos: Curso.count(),
-            totalMatriculas: Matricula.count()
-        ]
-    }
 
     def update(Long id) {
 
@@ -100,7 +99,7 @@ class MatriculaController {
 
             flash.error = 'Matrícula não encontrada.'
 
-            redirect(action: 'index')
+            redirect(uri: '/matriculas')
 
             return
         }
@@ -118,7 +117,7 @@ class MatriculaController {
                 )
 
         matricula.valorPago =
-                params.bigDecimal('valorPago')
+                params.valorPago ? (params.valorPago as BigDecimal) : null
 
         if (!matricula.validate()) {
 
@@ -141,7 +140,7 @@ class MatriculaController {
 
         flash.message = 'Matrícula atualizada com sucesso.'
 
-        redirect(action: 'index')
+        redirect(uri: '/matriculas')
     }
 
     def delete(Long id) {
@@ -154,6 +153,6 @@ class MatriculaController {
             flash.message = 'Matrícula removida com sucesso.'
         }
 
-        redirect(action: 'index')
+        redirect(uri: '/matriculas')
     }
 }
